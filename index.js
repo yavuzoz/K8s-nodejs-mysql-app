@@ -7,10 +7,10 @@ const mysql = require('mysql2/promise');
 const app = express();
 const port = process.env.PORT || 3000;
 const mysqlConfig = {
-  host: 'localhost',
-  user: 'root', // MySQL kullanıcı adınız
-  password: 'aswq', // MySQL şifreniz
-  database: 'mydatabase',
+  host: process.env.DB_HOST || '',
+  user: process.env.DB_USER || '',
+  password: process.env.DB_PASSWORD || '',
+  database: process.env.DB_NAME || '',
 };
 
 async function initMySQL() {
