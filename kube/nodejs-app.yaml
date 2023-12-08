@@ -16,18 +16,33 @@ spec:
         - name: nodejs-app
           image: yavuzozbay/nodejs-app:1.0.0 
           env:
-            - name: PORT
-              value: "3000" 
-            - name: MYSQL_HOST
-              value: "mysql-service" 
-            - name: MYSQL_USER
-              value: "root" 
-            - name: MYSQL_PASSWORD
-              value: "aswq" 
-            - name: MYSQL_DATABASE
-              value: "mydatabase" 
-          ports:
-            - containerPort: 3000
+      - name: PORT
+        valueFrom:
+          secretKeyRef:
+            name: mydatabase-secret
+            key: PORT
+      - name: MYSQL_HOST
+        valueFrom:
+          secretKeyRef:
+            name: mydatabase-secret
+            key: MYSQL_HOST
+      - name: MYSQL_USER
+        valueFrom:
+          secretKeyRef:
+            name: mydatabase-secret
+            key: MYSQL_USER
+      - name: MYSQL_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: mydatabase-secret
+            key: MYSQL_PASSWORD
+      - name: MYSQL_DATABASE
+        valueFrom:
+          secretKeyRef:
+            name: mydatabase-secret
+            key: MYSQL_DATABASE
+    ports:
+      - containerPort: 3000
 
 ---
 apiVersion: v1
